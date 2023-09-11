@@ -1,0 +1,63 @@
+<!-- <form [formGroup] ="loginForm" (ngSubmit)="onSubmit()">
+  <div class="example-container">
+  <mat-form-field>
+      <mat-label>Enter your email</mat-label>
+      <input matInput placeholder="pat@example.com" formControlName="useremail" required>
+    </mat-form-field>
+</div>
+
+<div class="example-container">
+    <mat-form-field>
+      <mat-label>Enter your password</mat-label>
+      <input matInput [type]="hide ? 'password' : 'text'" formControlName = "userPassword">
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <p>
+    <button type="submit">Submit</button>
+  </p>
+</form> -->
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="box">
+          
+          <div *ngIf = 'errorMessage' class="alert alert-danger">
+            {{errorMessage}}
+          </div>
+
+          <h1>Login</h1>
+
+          <input type="text" name="" placeholder="Email or Phone Number" formControlName="useremail">
+          
+          <div *ngIf="loginFormControl['useremail'].invalid && 
+            (loginFormControl['useremail'].dirty || loginFormControl['useremail'].touched)" class="alert alert-danger">
+            <div *ngIf="loginFormControl['useremail'].errors?.['required']">
+              Email or Phone Number is required.
+            </div>
+          </div>
+          
+          <input type="password" name="" placeholder="Password" formControlName="userPassword">
+          <div *ngIf="loginFormControl['userPassword'].invalid &&
+            (loginFormControl['userPassword'].dirty || loginFormControl['userPassword'].touched)"
+            class="alert alert-danger">
+            <div *ngIf="loginFormControl['userPassword'].errors?.['required']">
+              Password is required.
+            </div>
+          </div>
+          <!-- <div *ngIf="loginFormControl['password'].errors?.['pattern']">
+                Minimum eight characters, at least one letter, one number and one special character.
+            </div>  -->
+          <a class="forgot text-muted" href="#">Forgot password?</a>
+          <input type="submit" name="loginBtn" value="Login">
+
+          <a class="forgot text-muted" href = "/register">Don't Have Account? Sign Up</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

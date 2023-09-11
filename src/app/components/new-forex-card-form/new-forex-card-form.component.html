@@ -1,0 +1,144 @@
+<mat-stepper #stepper>
+    <mat-step [stepControl]="firstFormGroup" label="Personal Details">
+        <mat-card>
+            <mat-card-content>
+                <!-- form to send otp on the phone number and -->
+                <form [formGroup]="firstFormGroup" (ngSubmit)='sendOTP()'>
+                    <ng-template matStepLabel>Personl Details</ng-template>
+                    <div>
+                        <mat-form-field class="wrapper">
+                            <mat-label>Phone Number</mat-label>
+                            <input matInput placeholder="Enter Phone Number" formControlName="phoneNumber" required>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <button mat-button>Verify</button>
+                    </div>
+                </form>
+                <!-- form to verify the phone number-->
+                <div *ngIf='isOtpSent'>
+                    <form>
+
+                        <mat-form-field class="wrapper">
+                            <mat-label>Enter Your OTP</mat-label>
+                            <input matInput placeholder="Enter Phone Number" formControlName="otp" required>
+                        </mat-form-field>
+                        <div>
+                            <button mat-button>Verify</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- form to  take the personal details from the user -->
+                <div *ngIf='isOtpVerified'>
+                    <form>
+                        <div>
+                        <mat-form-field class="wrapper">
+                            <mat-label>Adhaar Card</mat-label>
+                            <input matInput formControlName="secondCtrl" placeholder="0000 1111 2222" required>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <button mat-button>Verify</button>
+                    </div>
+                    <div *ngIf = 'isAdhaarVerified'>
+                        <div>
+                            <mat-form-field class="wrapper">
+                                <mat-label>Pan Card</mat-label>
+                                <input matInput formControlName="secondCtrl" placeholder="adppj12345" required>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <button mat-button>Verify</button>
+                        </div>
+                        
+                    </div>
+
+                    <div *ngIf = 'isPancardVerified'>
+                        <div>
+                            <mat-form-field class="wrapper">
+                                <mat-label>Passport</mat-label>
+                                <input matInput formControlName="secondCtrl" placeholder="adppj12345" required>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <button mat-button>Verify</button>
+                        </div>
+                    </div>
+                        <div>
+                            <button mat-button>Verify</button>
+                        </div>
+                        <!-- <div>
+            <button mat-raised-button matStepperNext>Next</button>
+        </div> -->
+                    </form>
+                </div>
+            </mat-card-content>
+        </mat-card>
+        <mat-divider></mat-divider>
+        <div>
+            <button mat-raised-button matStepperNext>Next</button>
+        </div>
+
+        <!-- Second Mat Step to verify documents -->
+    </mat-step>
+
+    <mat-step [stepControl]="secondFormGroup" label="Document Verification">
+        <mat-card>
+            <mat-card-content>
+                <form [formGroup]="secondFormGroup">
+                    <div>
+                        <mat-form-field class="wrapper">
+                            <mat-label>Enter Your Name as Per Adhaar Card</mat-label>
+                            <input matInput placeholder="Enter Your Name" formControlName="otp" required>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field class="wrapper">
+                            <mat-label>Enter Your Email</mat-label>
+                            <input matInput placeholder="Enter your mail" formControlName="otp" required>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <button mat-button>Verify</button>
+                    </div>
+                    <div *ngIf = 'isAdhaarVerified'>
+                        <div>
+                            <mat-form-field class="wrapper">
+                                <mat-label>Pan Card</mat-label>
+                                <input matInput formControlName="secondCtrl" placeholder="adppj12345" required>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <button mat-button>Verify</button>
+                        </div>
+                        
+                    </div>
+
+                    <div *ngIf = 'isPancardVerified'>
+                        <div>
+                            <mat-form-field class="wrapper">
+                                <mat-label>Passport</mat-label>
+                                <input matInput formControlName="secondCtrl" placeholder="adppj12345" required>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <button mat-button>Verify</button>
+                        </div>
+                    </div>
+                    <div>
+                        <button mat-button matStepperPrevious>Back</button>
+                        <button mat-button matStepperNext>Next</button>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <p>You are now done.</p>
+        <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+        </div>
+    </mat-step>
+</mat-stepper>
