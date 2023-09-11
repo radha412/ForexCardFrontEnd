@@ -1,0 +1,9 @@
+<form [formGroup]="registrationForm" (ngSubmit)="sendOTP()">
+
+    <label for="email">Enter your email</label>
+    <input type="email" formControlName='email' name='email' id='email'>
+
+    <button type = "submit">
+        SendOTP
+    </button>
+</form>
